@@ -1,0 +1,6 @@
+config
+sqlalchemy
+# for postgres db boosting : ​
+psycopg2 ​
+# for create/drop/check databases and others​
+sqlalchemy_utils
