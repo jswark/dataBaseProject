@@ -1,11 +1,8 @@
 
 from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey, text, create_engine
 
-#engine = create_engine('mysql://postgress:PASSWORD@10.13.84.165/sqlachemy_db'.format(auth['user'], auth['password']), echo=True)
-#engine = create_engine('postgresql+psycopg2://{}:{}@localhost/sqlachemy_db'.format(auth['user'], auth['password']),
-                     #  echo=True)
+engine = create_engine('postgresql://jswark:12345@localhost/pockemons', echo=True)
 
-engine = create_engine('sqlite:///:memory:', echo=False)
 
 metadata = MetaData()
 

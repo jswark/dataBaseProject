@@ -1,9 +1,7 @@
 #from config import auth
 from sqlalchemy import create_engine
 
-
-#engine = create_engine('postgresql://{}:{}@localhost/sqlachemy_db'.format(auth['user'], auth['password']), echo=True)
-engine = create_engine('sqlite:///:memory:', echo=False)
+engine = create_engine('postgresql://jswark:12345@localhost/pockemons', echo=True)
 cursor = engine.connect()
 
 query = '''

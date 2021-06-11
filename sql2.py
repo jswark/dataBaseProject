@@ -4,7 +4,7 @@ from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey, tex
 
 
 
-engine = create_engine('sqlite:///:memory:', echo=False)
+engine = create_engine('postgresql://jswark:12345@localhost/pockemons', echo=True)
 metadata = MetaData(engine)
 books_table = Table('books', metadata, autoload=True) # create a Table object
 authors_table = Table('authors', metadata, autoload=True) # create a Table object

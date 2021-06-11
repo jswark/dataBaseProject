@@ -7,9 +7,7 @@ Base = declarative_base()
 schema_name = 'example3'
 
 
-#engine = create_engine('postgresql://{}:{}@localhost/sqlachemy_db'.format(auth['user'], auth['password']), echo=True)
-engine = create_engine('sqlite:///:memory:', echo=False)
-# metadata = MetaData(engine)
+engine = create_engine('postgresql://jswark:12345@localhost/pockemons', echo=True)
 engine.execute('CREATE SCHEMA IF NOT EXISTS {}'.format(schema_name))
 
 
