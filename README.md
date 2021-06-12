@@ -9,7 +9,7 @@
 	TODO: описание таблиц
 	
     
-![alt text](scheme.jpg " DataBase scheme")​
+![alt text](new_scheme.jpg " DataBase scheme")​
 
 #### Критерии к БД:
 **[1]** БД должна быть в третьей нормальной форме или выше;
