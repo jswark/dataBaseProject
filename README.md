@@ -14,7 +14,7 @@
 категории, таблица healths хранит показатель здоровья для каждой категории. Схема представлена ниже.
 	
     
-![alt text](https://github.com/jswark/dataBaseProject/blob/readme/new_schema.jpg)​
+![alt text](new_schema.jpg)​
 
 #### Критерии к БД:
 **[1]** БД должна быть в третьей нормальной форме или выше;
