@@ -9,7 +9,7 @@
 	TODO: описание таблиц
 	
     
-![alt text](new_scheme.jpg " DataBase scheme")​
+![alt text](https://github.com/jswark/dataBaseProject/blob/readme/new_schema.jpg)​
 
 #### Критерии к БД:
 **[1]** БД должна быть в третьей нормальной форме или выше;
