@@ -1,11 +1,11 @@
 from tkinter import *
 from tkinter import ttk
 
-from sqlalchemy import create_engine
-
-from sqlalchemy import MetaData, Table
+from sqlalchemy import MetaData
 from sqlalchemy import text
-import sql3
+from sqlalchemy_utils import drop_database
+
+import sql2
 import pymysql
 
 def delete_row():
@@ -34,9 +34,6 @@ def clear_db():
     result = conn.execute(query)
     on_select()
 
-## ???
-def delete_db():
-    sql3.Base.metadata.drop_all(engine)
 # --------------------------------------------------------------------
 def add_row():
     def add_query():
@@ -71,7 +68,6 @@ def add_row():
 
     add_b = Button(add, text="Add", command=add_query, width=10)
     add_b.grid(row=red, column=0, columnspan=2, pady=5)
-
 
 # --------------------------------------------------------------------
 def edit_row():
@@ -118,12 +114,17 @@ def del_button():
     re_button.destroy()
     on_select()
 
+def delete_db():
+    for tbl in reversed(meta.sorted_tables):
+        engine.execute(tbl.delete())
+    drop_database(engine.url)
+
 def find_in():
     def show_find_query():
         query = f'''
         select *
         from {tabs}
-        where id={entries[0].get()}
+        where {entries[0].get()}='{entries[1].get()}'
         '''
 
         result = conn.execute(query)
@@ -151,13 +152,18 @@ def find_in():
     tabs = meta.tables[choose.get()]
     entries = {}
 
-    label = Label(find, text='find by id', width=20)
+    label = Label(find, text='field name', width=20)
     label.grid(row=0, column=0)
     entries[0] = Entry(find, width=30)
     entries[0].grid(row=0, column=1)
 
+    label = Label(find, text='find', width=20)
+    label.grid(row=1, column=0)
+    entries[1] = Entry(find, width=30)
+    entries[1].grid(row=1, column=1)
+
     edit_b = Button(find, text="Show", command=show_find_query, width=10)
-    edit_b.grid(row=1, column=0, columnspan=2, pady=5)
+    edit_b.grid(row=2, column=0, columnspan=2, pady=5)
 
 def on_select(event=None):
     for item in tab.get_children():
@@ -183,13 +189,17 @@ def on_select(event=None):
         iid_counter += 1
 
 
-## сюда создание дб
+## create db
+engine = sql2.create_db()
+sql2.add_Table()
+
 pymysql.install_as_MySQLdb()
-engine = create_engine('postgresql://jswark:12345@localhost/pockemons', echo=True)
+
 conn = engine.connect()
 meta = MetaData(bind=conn)
 meta.reflect()
 
+## ui config
 window = Tk()
 window.title("Pockemons")
 window.geometry("1300x500")
@@ -202,7 +212,7 @@ option_frame = Frame(window)
 option = OptionMenu(option_frame, choose, *list(meta.tables.keys()), command=on_select)
 option.pack(side=LEFT)
 
-# main buttons
+## main buttons
 add_button = Button(option_frame, text="Add", command=add_row, width=10)
 add_button.pack(side=LEFT)
 
@@ -215,15 +225,12 @@ delete_button.pack(side=LEFT)
 add_button = Button(option_frame, text="Clear all", command=clear_db, width=10)
 add_button.pack(side=LEFT)
 
-add_button = Button(option_frame, text="Delete db", command=delete_db, width=10)
-add_button.pack(side=LEFT)
-
 add_button = Button(option_frame, text="Find in", command=find_in, width=10)
 add_button.pack(side=LEFT)
 
 option_frame.pack(side=TOP)
 
-#frame
+## frame
 tree_frame = Frame(window)
 
 tab = ttk.Treeview(tree_frame)
@@ -240,9 +247,9 @@ tab.pack(fill=BOTH, expand=1)
 
 tree_frame.pack(side=TOP, fill=BOTH, expand=1)
 
+## app
 on_select()
-
 window.mainloop()
 
-#???
+## delete db
 delete_db()
