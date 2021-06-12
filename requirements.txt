@@ -1,7 +1,7 @@
 config
 SQLAlchemy
-# for postgres db boosting : ​
-psycopg2 ​
-# for create/drop/check databases and others​
+# for postgres db boosting
+psycopg2
+# for create/drop/check databases and others
 sqlalchemy-utils
 mysql-connector-python
