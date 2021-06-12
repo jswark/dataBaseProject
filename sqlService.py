@@ -8,7 +8,7 @@ from sqlalchemy import MetaData
 # create db
 def create_db():
     global engine
-    engine = create_engine('postgresql://postgres:12345@localhost/postgres', echo=True)
+    engine = create_engine('postgresql://jswark:12345@localhost/new', echo=True)
 
     if not database_exists(engine.url):
         create_database(engine.url)
@@ -114,8 +114,4 @@ def add_Table():
             pokem = PokedexClass(i[0], i[1], i[2], i[3], i[4], i[5], i[6])
             session.add(pokem)
 
-
-
     session.commit()
-
-

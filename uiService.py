@@ -5,7 +5,7 @@ from sqlalchemy import MetaData
 from sqlalchemy import text
 from sqlalchemy_utils import drop_database
 
-import sql2
+import sqlService
 import pymysql
 
 def delete_row():
@@ -34,7 +34,6 @@ def clear_db():
     result = conn.execute(query)
     on_select()
 
-# --------------------------------------------------------------------
 def add_row():
     def add_query():
         add_list = []
@@ -69,7 +68,6 @@ def add_row():
     add_b = Button(add, text="Add", command=add_query, width=10)
     add_b.grid(row=red, column=0, columnspan=2, pady=5)
 
-# --------------------------------------------------------------------
 def edit_row():
     def edit_query():
 
@@ -190,8 +188,8 @@ def on_select(event=None):
 
 
 ## create db
-engine = sql2.create_db()
-sql2.add_Table()
+engine = sqlService.create_db()
+sqlService.add_Table()
 
 pymysql.install_as_MySQLdb()
 
